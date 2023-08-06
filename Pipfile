@@ -6,9 +6,13 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = {version = "*", extras = ["standard"]}
+pydantic = "*"
+email-validator = "*"
+python-multipart = "*"
+chardet = "*"
+starlette = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
-python_full_version = "3.9.6"
+python_version = "3.10"
