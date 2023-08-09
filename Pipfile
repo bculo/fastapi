@@ -11,6 +11,7 @@ email-validator = "*"
 python-multipart = "*"
 chardet = "*"
 starlette = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
