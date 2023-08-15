@@ -1,6 +1,6 @@
 from typing import Union
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class ItemBase(BaseModel):
@@ -35,3 +35,7 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class Message(BaseModel):
+    content: str = Field(default=None, min_length=10)
