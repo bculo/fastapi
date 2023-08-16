@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.11.20-management-alpine
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmquser
+      - RABBITMQ_DEFAULT_PASS=rabbitmqpassword
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmqstore:/var/lib/rabbitmq
+
+volumes:
+  rabbitmqstore:

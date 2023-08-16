@@ -12,6 +12,10 @@ python-multipart = "*"
 chardet = "*"
 starlette = "*"
 sqlalchemy = "*"
+celery = "*"
+python-dotenv = "*"
+pydantic-settings = "*"
+kombu = "*"
 
 [dev-packages]
 

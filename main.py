@@ -1,7 +1,14 @@
-from fastapi import FastAPI, status
+import os
+from datetime import time
+from typing import Annotated
+
+from fastapi import FastAPI, status, Query
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
+
+import celery_instance
+from celery_instance import send_push_notification
 from domain.exceptions import CoreException, NotFoundException
 from routers import users, items
 from sql import models
@@ -22,6 +29,7 @@ app.add_middleware(
 app.include_router(users.router)
 app.include_router(items.router)
 
+
 @app.exception_handler(CoreException)
 async def unicorn_exception_handler(request: Request, exc: CoreException):
     description = "Unknown exception" if exc.description is None else exc.description
@@ -33,8 +41,12 @@ async def unicorn_exception_handler(request: Request, exc: CoreException):
 
 
 @app.get("/")
-async def throw_exception():
+async def throw_exception(word: Annotated[str, Query()]):
+    print(word)
+    send_push_notification.delay(word)
     return "ITS WORKS"
+
+
 
 
 

@@ -4,10 +4,11 @@ from fastapi import APIRouter, Depends, Query, BackgroundTasks
 from sqlalchemy.orm import Session
 from starlette import status
 
+from celery_instance import celery
+
 from domain.exceptions import NotFoundException, CoreException
 
-from sql import crud, models, schemas
-from sql.database import engine, SessionLocal
+from sql import crud, schemas
 from sql.dependencies import get_db
 from sql.schemas import Message
 
@@ -30,10 +31,7 @@ async def user_page(take: Annotated[int, Query()], skip: Annotated[int, Query()]
     users = crud.get_users(db, skip, take)
     if len(users) == 0:
         return []
-    inn_models = []
-    for user in users:
-        models.append(schemas.User(**user.__dict__))
-    return models
+    return users
 
 
 @router.get("/me")
@@ -56,3 +54,6 @@ def send_messages(message: Message, db: Session):
     users = crud.get_users_all(db)
     for user in users:
         print(f"Sending message {message.content} to {user.id}")
+
+
+print(celery)
