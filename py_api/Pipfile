@@ -16,6 +16,7 @@ celery = "*"
 python-dotenv = "*"
 pydantic-settings = "*"
 kombu = "*"
+flower = "*"
 
 [dev-packages]
 

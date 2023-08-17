@@ -14,7 +14,7 @@ DEFAULT_ROUTING_KEY = settings.default_routing_key
 
 celery.conf.task_queues = (
     Queue('test', Exchange('test'), routing_key='test.first'),
-    Queue(DEFAULT_QUEUE, Exchange(DEFAULT_EXCHANGE, type='direct'), routing_key=DEFAULT_ROUTING_KEY),
+    Queue(DEFAULT_QUEUE, Exchange(DEFAULT_EXCHANGE, type='topic'), routing_key=DEFAULT_ROUTING_KEY),
 )
 
 celery.conf.task_default_queue = DEFAULT_QUEUE
