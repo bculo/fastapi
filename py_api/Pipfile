@@ -17,6 +17,9 @@ python-dotenv = "*"
 pydantic-settings = "*"
 kombu = "*"
 flower = "*"
+passlib = {version = "*", extras = ["bcrypt"]}
+python-jose = {version = "*", extras = ["cryptography"]}
+jose = "*"
 
 [dev-packages]
 
