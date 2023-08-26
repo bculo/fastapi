@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from dependencies import get_db
 from routers.schemas import CreateUser
-from sql.students_crud import get_all
+from sql import students_crud
+from sql.models import Student
 
 router = APIRouter(
     prefix="/students",
@@ -18,7 +19,7 @@ router = APIRouter(
     description="Fetch all users"
 )
 async def all_users(db: Session = Depends(get_db)):
-    return get_all(db)
+    return students_crud.get_all(db)
 
 
 @router.post(
@@ -26,6 +27,6 @@ async def all_users(db: Session = Depends(get_db)):
     description="Create new user"
 )
 async def create_user(request: Annotated[CreateUser, Body()], db: Session = Depends(get_db)):
-    print(request.model_dump())
-    return "USER ADDED"
+    entity = Student(**request.model_dump())
+    return students_crud.create(db, entity)
 
